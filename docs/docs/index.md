@@ -12,7 +12,7 @@ Turnip is the frontend for my personal page.
 
 - [ ] Setup?
 - [ ] Quickstart
-- [ ] [Onboarding guide](./docs/docs/docs/docs/onboarding.md)
+- [ ] [Onboarding guide](./docs/docs/onboarding.md)
 - [ ] Testing locally
 - [ ] Testing via dev stack
 - [ ] Deploying to production
