@@ -21,6 +21,7 @@
     "next": "13.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "turnip_api": "github:TurnipXenon/turnip_api#5afe6d0d0d067e77a9edc8f6ae06eabf4b0b09f7",
     "typescript": "4.9.4"
   }
 }
