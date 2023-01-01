@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 import {login} from "../../../lib/clients/turnip/api/login";
 
 // todo(turnip): improve layout and extract css
-export default function Login() {
+export default function LoginIndex() {
     // from Ido @ https://stackoverflow.com/a/63690287/17836168
     const {profile, setProfile, turnipClient, setOptions} = useAppContext();
     const router = useRouter();

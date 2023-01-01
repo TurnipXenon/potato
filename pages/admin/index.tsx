@@ -4,14 +4,14 @@ import styles from '../../styles/Home.module.css'
 import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
 import {Card, CardActionArea, CardContent} from "@mui/material";
-import authBasedAdminRedirect from "../../lib/util/use-auth-admin-redirect";
+import useAuthAdminRedirect from "../../lib/util/use-auth-admin-redirect";
 
 // todo(turnip): improve layout and extract css
-export default function Admin() {
+export default function AdminIndex() {
     const {profile} = useAppContext();
     const router = useRouter();
 
-    authBasedAdminRedirect();
+    useAuthAdminRedirect();
     if (!profile) {
         return <></>
     }

@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
 import {useAppContext} from "../../../lib/util/app-context";
 import {Content} from "turnip_api/ts/rpc/turnip/service";
-import {Button, TextField} from "@mui/material";
+import {Button, TextField, TextFieldProps} from "@mui/material";
 import Head from "next/head";
-import authBasedAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
 import useEffectOnce from "../../../lib/util/use-effect-once";
+import useAuthAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
 
-export default function Index() {
-    const {profile, contentListProp, setContentListProp} = useAppContext();
+export default function ContentSlug() {
+    const {profile, contentListProp, setContentListProp, turnipClient, options} = useAppContext();
     // todo: refactor
     const [content] = useState<Content>((() => {
         if (contentListProp.length !== 1) {
@@ -26,6 +26,9 @@ export default function Index() {
     })());
 
     const router = useRouter()
+    const titleRef = useRef<TextFieldProps>();
+    const contentRef = useRef<TextFieldProps>();
+    const descriptionRef = useRef<TextFieldProps>();
 
     // re-route if setting the contentList went wrong
     useEffect(() => {
@@ -39,9 +42,29 @@ export default function Index() {
         setContentListProp!([]); // avoid data leak
     })
 
+    const updateContent = () => {
+        // todo: debouncing
+        turnipClient!.updateContent({
+            item: {
+                title: titleRef.current?.value as string,
+                description: descriptionRef.current?.value as string,
+                content: contentRef.current?.value as string,
+                tagList: [], // todo: save tagList
+                meta: {}, // todo save meta
+                primaryId: content.primaryId,
+                authorId: content.authorId,
+            }
+        }, options)
+            .then(() => {
+                void router.push("/admin/contents/");
+            }).catch(err => {
+            console.log(err);
+        });
+    }
+
     // for faster design iteration, comment this and then later uncomment
     // tip: add a to//do: comment after redesign at the top so you don't forget!
-    authBasedAdminRedirect();
+    useAuthAdminRedirect();
     if (!profile) {
         return <></>
     }
@@ -64,6 +87,7 @@ export default function Index() {
                                variant="outlined"
                                defaultValue={content.title}
                                style={{marginBottom: "1em"}}
+                               inputRef={titleRef}
                     />
                     <TextField
                         name="Content"
@@ -71,8 +95,9 @@ export default function Index() {
                         id="outlined-multiline-flexible"
                         multiline
                         maxRows={10}
-                        value={content.content}
+                        defaultValue={content.content}
                         style={{marginBottom: "1em"}}
+                        inputRef={contentRef}
                     />
                     <TextField
                         id="outlined-multiline-flexible"
@@ -80,13 +105,14 @@ export default function Index() {
                         label="Description"
                         multiline
                         maxRows={10}
-                        value={content.description}
+                        defaultValue={content.description}
                         style={{marginBottom: "1em"}}
+                        inputRef={descriptionRef}
                     />
                     <h3>Media (TODO)</h3>
                     <h3>Tags (TODO)</h3>
                     <h3>Access Details (TODO)</h3>
-                    <Button variant="outlined" onClick={() => alert("Todo")}>Save</Button>
+                    <Button variant="outlined" onClick={updateContent}>Save</Button>
                 </div>
 
             </main>

@@ -21,7 +21,7 @@ export const ContentCard = (props: ContentCardProps) => {
                 <>
                     <h1>{content.title}</h1><br/>
                     <h2>Content</h2>
-                    {content.content}
+                    <article style={{whiteSpace: "pre-line"}}>{content.content}</article>
                     <br/><br/>
                     <h2>Tags</h2>
                     <ul>
