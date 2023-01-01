@@ -9,7 +9,7 @@ import {login} from "../../../lib/clients/turnip/api/login";
 // todo(turnip): improve layout and extract css
 export default function Login() {
     // from Ido @ https://stackoverflow.com/a/63690287/17836168
-    const {profile, setProfile, turnipClient} = useAppContext();
+    const {profile, setProfile, turnipClient, setOptions} = useAppContext();
     const router = useRouter();
 
     const usernameRef = useRef<TextFieldProps>();
@@ -28,10 +28,13 @@ export default function Login() {
 
     const onClickLogin = () => {
         // todo: prevent double clicking using hook!
-        login(turnipClient!,
-            usernameRef.current?.value as string,
-            passwordRef.current?.value as string,
-            setProfile!);
+        login({
+            turnipClient: turnipClient!,
+            username: usernameRef.current?.value as string,
+            password: passwordRef.current?.value as string,
+            setProfile: setProfile!,
+            setOptions: setOptions!,
+        });
     }
 
     return (

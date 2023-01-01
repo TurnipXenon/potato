@@ -105,3 +105,12 @@ a {
     color-scheme: dark;
   }
 }
+
+.MuiCard-root {
+  margin: 2em;
+}
+
+.MuiCardContent-root {
+  padding: 2em;
+  margin: 2em;
+}
