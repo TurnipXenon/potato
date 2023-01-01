@@ -5,9 +5,9 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {ContentCard} from "../../../lib/components/content-card";
 import Head from "next/head";
 import styles from "../../../styles/Home.module.css";
-import authBasedAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
+import useAuthAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
 
-export default function Index() {
+export default function ContentIndex() {
     const {profile, turnipClient, options, setContentListProp} = useAppContext();
     const router = useRouter();
     const [contentList, setContentList] = useState<Content[]>([]);
@@ -34,7 +34,7 @@ export default function Index() {
         })
     }
 
-    authBasedAdminRedirect();
+    useAuthAdminRedirect();
     if (!profile) {
         return <></>
     }
