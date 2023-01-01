@@ -1,41 +1,18 @@
-import {Profile} from "../models/profile";
-import React from "react";
+import {TurnipClient} from "turnip_api";
+import {LoginResponse} from "turnip_api/ts/rpc/turnip/service";
 
 export const login = (
+    turnipClient: TurnipClient,
     username: string,
     password: string,
-    setProfile: ((value: (((prevState: (Profile | undefined)) => (Profile | undefined)) | Profile | undefined)) => void) | undefined
+    setProfile: ((value: (((prevState: (LoginResponse | undefined)) => (LoginResponse | undefined)) | LoginResponse | undefined)) => void)
 ) => {
-    // todo: cleanup
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-        "username": username,
-        "password": password
-    });
-
-    const requestOptions: RequestInit = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    fetch("http://localhost:8000/api/v1/tokens", requestOptions)
+    turnipClient.login({username: username, password: password})
         .then(response => {
-            if (response.ok) {
-                console.log("Testing");
-                response.json().then((result) => {
-                    console.log(result);
-                    setProfile!(result as Profile);
-                })
-            } else {
-                console.log("Error code", response.status);
-                response.text().then((text) => {
-                    console.log(text);
-                })
-            }
-        })
-        .catch(error => console.log('error', error));
+            console.log(response.response);
+            setProfile(response.response);
+        }).catch(err => {
+        console.log('error', err)
+        // todo: relay to frontend with wrong credentials
+    })
 }

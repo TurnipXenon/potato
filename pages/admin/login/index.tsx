@@ -9,7 +9,7 @@ import {login} from "../../clients/turnip/api/login";
 // todo(turnip): improve layout and extract css
 export default function Login() {
     // from Ido @ https://stackoverflow.com/a/63690287/17836168
-    const {profile, setProfile} = useAppContext();
+    const {profile, setProfile, turnipClient} = useAppContext();
     const router = useRouter();
 
     const usernameRef = useRef<TextFieldProps>();
@@ -19,7 +19,7 @@ export default function Login() {
         if (profile) {
             void router.push("/admin/");
         }
-    }, [profile])
+    }, [profile, router])
 
 
     if (profile) {
@@ -27,8 +27,11 @@ export default function Login() {
     }
 
     const onClickLogin = () => {
-        // todo: prevent double clicking
-        login(usernameRef.current?.value as string, passwordRef.current?.value as string, setProfile);
+        // todo: prevent double clicking using hook!
+        login(turnipClient!,
+            usernameRef.current?.value as string,
+            passwordRef.current?.value as string,
+            setProfile!);
     }
 
     return (
