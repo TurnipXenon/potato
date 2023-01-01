@@ -1,22 +1,17 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Head from "next/head";
 import styles from '../../styles/Home.module.css'
 import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
 import {Card, CardActionArea, CardContent} from "@mui/material";
+import authBasedAdminRedirect from "../../lib/util/use-auth-admin-redirect";
 
 // todo(turnip): improve layout and extract css
 export default function Admin() {
     const {profile} = useAppContext();
     const router = useRouter();
 
-    // re-route to login if not in the right location
-    useEffect(() => {
-        if (!profile) {
-            void router.push("/admin/login/");
-        }
-    }, [profile, router])
-
+    authBasedAdminRedirect();
     if (!profile) {
         return <></>
     }

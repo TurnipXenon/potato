@@ -5,18 +5,13 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {ContentCard} from "../../../lib/components/content-card";
 import Head from "next/head";
 import styles from "../../../styles/Home.module.css";
+import authBasedAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
 
 export default function Index() {
-    const {profile, turnipClient, options} = useAppContext();
+    const {profile, turnipClient, options, setContentListProp} = useAppContext();
     const router = useRouter();
     const [contentList, setContentList] = useState<Content[]>([]);
 
-    // re-route to login if not in the right location
-    useEffect(() => {
-        if (!profile) {
-            void router.push("/admin/login/");
-        }
-    }, [profile, router])
     // get all contents only if logged in
     useEffect(() => {
         if (!profile) {
@@ -35,10 +30,11 @@ export default function Index() {
 
     const createContentListUi = (contentList: Content[]) => {
         return contentList.map((content) => {
-            return ContentCard({content, router})
+            return ContentCard({content, router, setContentListProp})
         })
     }
 
+    authBasedAdminRedirect();
     if (!profile) {
         return <></>
     }

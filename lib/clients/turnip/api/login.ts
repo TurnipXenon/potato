@@ -14,12 +14,12 @@ export interface loginProps {
 export const login = (props: loginProps) => {
     props.turnipClient.login({username: props.username, password: props.password})
         .then(response => {
-            props.setProfile(response.response);
             props.setOptions({
                 meta: {
                     "Authorization": `Token ${response.response.token?.accessToken}`
                 }
             });
+            props.setProfile(response.response);
         }).catch(err => {
         console.log('error', err)
         // todo: relay to frontend with wrong credentials
