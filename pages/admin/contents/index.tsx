@@ -16,7 +16,7 @@ export default function Index() {
         if (!profile) {
             void router.push("/admin/login/");
         }
-    }, [profile])
+    }, [profile, router])
     // get all contents only if logged in
     useEffect(() => {
         if (!profile) {
@@ -31,7 +31,7 @@ export default function Index() {
         }).catch(err => {
             console.log(err);
         })
-    }, [turnipClient, profile])
+    }, [turnipClient, profile, options])
 
     const createContentListUi = (contentList: Content[]) => {
         return contentList.map((content) => {

@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Head from "next/head";
 import styles from '../../styles/Home.module.css'
 import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
-import {Content} from "turnip_api/ts/rpc/turnip/service";
-import {ContentCard} from "../../lib/components/content-card";
 import {Card, CardActionArea, CardContent} from "@mui/material";
 
 // todo(turnip): improve layout and extract css
@@ -17,7 +15,7 @@ export default function Admin() {
         if (!profile) {
             void router.push("/admin/login/");
         }
-    }, [profile])
+    }, [profile, router])
 
     if (!profile) {
         return <></>
