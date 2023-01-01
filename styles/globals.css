@@ -114,3 +114,15 @@ a {
   padding: 2em;
   margin: 2em;
 }
+
+main {
+  padding: 2em;
+}
+
+.blockAllChildren {
+  display: grid;
+}
+
+.blockAllChildren > * {
+  margin-bottom: 1.5em;
+}

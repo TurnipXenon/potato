@@ -46,6 +46,7 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
+                {/*todo: proper onsubmit!*/}
                 <form className={styles.center} style={{["display"]: "flex", ["flexDirection"]: "column"}}>
                     <TextField name="Username" label="Username" variant="outlined" inputRef={usernameRef}/>
                     <TextField name="Password" label="Password" variant="outlined" inputRef={passwordRef}/>
