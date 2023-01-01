@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import Head from "next/head";
 import styles from '../../styles/Home.module.css'
-import {useAppContext} from "../util/app-context";
+import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
 
 // todo(turnip): improve layout and extract css

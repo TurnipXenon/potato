@@ -2,9 +2,9 @@ import React, {useEffect, useRef} from 'react';
 import Head from "next/head";
 import styles from '../../../styles/Home.module.css'
 import {Button, TextField, TextFieldProps} from "@mui/material";
-import {useAppContext} from "../../util/app-context";
+import {useAppContext} from "../../../lib/util/app-context";
 import {useRouter} from "next/router";
-import {login} from "../../clients/turnip/api/login";
+import {login} from "../../../lib/clients/turnip/api/login";
 
 // todo(turnip): improve layout and extract css
 export default function Login() {
