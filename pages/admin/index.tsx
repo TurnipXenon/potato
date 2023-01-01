@@ -1,24 +1,49 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Head from "next/head";
 import styles from '../../styles/Home.module.css'
 import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
+import {Content} from "turnip_api/ts/rpc/turnip/service";
+import {ContentCard} from "../../lib/components/content-card";
 
 // todo(turnip): improve layout and extract css
 export default function Admin() {
-    const {profile} = useAppContext();
+    const {profile, turnipClient, options} = useAppContext();
     const router = useRouter();
+    const [contentList, setContentList] = useState<Content[]>([]);
 
+    // re-route to login if not in the right location
     useEffect(() => {
         if (!profile) {
             void router.push("/admin/login/");
         }
     }, [profile])
+    // get all contents only if logged in
+    useEffect(() => {
+        if (!profile) {
+            return;
+        }
 
+        turnipClient?.getAllContent(
+            {},
+            options
+        ).then(allContentResponse => {
+            setContentList(allContentResponse.response.itemList)
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [turnipClient, profile])
+
+    const createContentListUi = (contentList: Content[]) => {
+        return contentList.map((content) => {
+            return ContentCard({content, router})
+        })
+    }
 
     if (!profile) {
         return <></>
     }
+
 
     return (
         <>
@@ -30,8 +55,10 @@ export default function Admin() {
             </Head>
             <main>
                 <form className={styles.center} style={{["display"]: "flex", ["flexDirection"]: "column"}}>
-                    Admin
+                    <h1>Admin</h1>
                 </form>
+                {createContentListUi(contentList)}
+                {/*todo: add bottom padding here*/}
             </main>
         </>
     );
