@@ -2,11 +2,12 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {Card, CardActionArea, CardContent} from "@mui/material";
 import React, {Dispatch, SetStateAction} from "react";
 import {NextRouter} from "next/router";
+import {fromStringMapToPairArray} from "../util/pair";
 
 export interface ContentCardProps {
     content: Content;
     router: NextRouter;
-    setContentListProp?: Dispatch<SetStateAction<Content[]>>
+    setContentListProp?: Dispatch<SetStateAction<Content[]>>;
 }
 
 export const ContentCard = (props: ContentCardProps) => {
@@ -26,7 +27,7 @@ export const ContentCard = (props: ContentCardProps) => {
                     <h2>Tags</h2>
                     <ul>
                         {content.tagList.map((tag) => {
-                            return <li key={tag}>{tag}</li>
+                            return <li key={tag}>{tag}</li>;
                         })}
                     </ul>
                     <br/>
@@ -38,10 +39,14 @@ export const ContentCard = (props: ContentCardProps) => {
                         <li>Author ID: {content.authorId}</li>
                         <li>Primary ID: {content.primaryId}</li>
                         <li>Description: {content.description}</li>
-                        {/*todo: content.meta here!!*/}
+                        {
+                            fromStringMapToPairArray(content.meta).map((value, index) => {
+                                return <li key={value.key}>{value.key}: {value.value}</li>;
+                            })
+                        }
                     </ul>
                 </>
             </CardContent>
         </CardActionArea>
-    </Card>
-}
+    </Card>;
+};
