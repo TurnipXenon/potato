@@ -50,7 +50,7 @@ export default function ContentSlug() {
                 title: titleRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
                 content: contentRef.current?.value as string,
-                tagList: tagList, // todo: save tagList
+                tagList: tagList,
                 meta: {}, // todo save meta
                 primaryId: content.primaryId,
                 authorId: content.authorId,
