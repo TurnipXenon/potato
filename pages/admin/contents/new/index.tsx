@@ -1,11 +1,23 @@
 import useAuthAdminRedirect from "../../../../lib/util/use-auth-admin-redirect";
-import React from "react";
+import React, {useState} from "react";
 import {useAppContext} from "../../../../lib/util/app-context";
 import Head from "next/head";
-import {Button} from "@mui/material";
+import {ContentEdit, ContentEditAction} from "../../../../lib/components/content-edit";
+import {Content} from "turnip_api/ts/rpc/turnip/service";
 
 export default function ContentNewIndex() {
-    const {profile, turnipClient, options, setContentListProp} = useAppContext();
+    const {profile} = useAppContext();
+    const [content] = useState<Content>((() => {
+        return {
+            title: "",
+            description: "",
+            content: "",
+            tagList: [],
+            meta: {},
+            primaryId: "10000000-0000-0000-0000-e4d1a9ddc777", // todo: make this optional
+            authorId: "",
+        };
+    })());
 
     useAuthAdminRedirect();
     if (!profile) {
@@ -23,7 +35,11 @@ export default function ContentNewIndex() {
             <main>
                 <h1>New Content</h1>
                 <br/>
-                <Button>Save</Button>
+                <br/>
+                {ContentEdit({
+                    content: content,
+                    action: ContentEditAction.Create,
+                })}
             </main>
         </>
     );
