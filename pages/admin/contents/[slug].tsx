@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
 import {useAppContext} from "../../../lib/util/app-context";
 import {Content} from "turnip_api/ts/rpc/turnip/service";
-import {Button, TextField, TextFieldProps} from "@mui/material";
+import {Button, List, ListItem, TextField, TextFieldProps} from "@mui/material";
 import Head from "next/head";
 import useEffectOnce from "../../../lib/util/use-effect-once";
 import useAuthAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
@@ -29,6 +29,7 @@ export default function ContentSlug() {
     const titleRef = useRef<TextFieldProps>();
     const contentRef = useRef<TextFieldProps>();
     const descriptionRef = useRef<TextFieldProps>();
+    const [tagList, setTagList] = useState<string[]>(content.tagList)
 
     // re-route if setting the contentList went wrong
     useEffect(() => {
@@ -49,7 +50,7 @@ export default function ContentSlug() {
                 title: titleRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
                 content: contentRef.current?.value as string,
-                tagList: [], // todo: save tagList
+                tagList: tagList,
                 meta: {}, // todo save meta
                 primaryId: content.primaryId,
                 authorId: content.authorId,
@@ -110,7 +111,27 @@ export default function ContentSlug() {
                         inputRef={descriptionRef}
                     />
                     <h3>Media (TODO)</h3>
-                    <h3>Tags (TODO)</h3>
+                    <h3>Tags</h3>
+                    <List>
+                        {tagList.map((value, index) => {
+                            return (<ListItem key={value}>
+                                <Button onClick={() => {
+                                    tagList.splice(index);
+                                    setTagList([...tagList]);
+                                }}>-</Button>
+                                <TextField
+                                    defaultValue={value}
+                                    onChange={(newValue) => {
+                                        tagList[index] = newValue.target.value;
+                                    }}></TextField>
+                            </ListItem>);
+                        })}
+                        <ListItem><Button onClick={() => {
+                            tagList.push("new tag");
+                            setTagList([...tagList]);
+                        }}>+</Button> Create new tag</ListItem>
+                    </List>
+                    <br/>
                     <h3>Access Details (TODO)</h3>
                     <Button variant="outlined" onClick={updateContent}>Save</Button>
                 </div>
