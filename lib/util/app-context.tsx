@@ -12,7 +12,7 @@ export interface IAppContextData {
     options?: RpcOptions;
     setOptions?: Dispatch<SetStateAction<RpcOptions | undefined>>;
     contentListProp: Content[];
-    setContentListProp?: Dispatch<SetStateAction<Content[]>>
+    setContentListProp?: Dispatch<SetStateAction<Content[]>>;
 }
 
 // from Arya @ https://stackoverflow.com/a/70729199/17836168
@@ -20,17 +20,18 @@ const Context = createContext<IAppContextData>({
     contentListProp: [],
 });
 
+export const createClient = (): TurnipClient => {
+    let t = new TwirpFetchTransport({baseUrl: process.env.BASE_URL ?? "http://localhost:8000/api"});
+    return new TurnipClient(t);
+};
+
 export const AppProvider = ({children}: any) => {
     const [profile, setProfile] = useState<LoginResponse | undefined>();
     const [options, setOptions] = useState<RpcOptions | undefined>();
     const [contentListProp, setContentListProp] = useState<Content[]>([]);
 
-    const createClient = (): TurnipClient => {
-        let t = new TwirpFetchTransport({baseUrl: process.env.BASE_URL ?? "http://localhost:8000/api"})
-        return new TurnipClient(t);
-    }
-    const [turnipClient] = useState<TurnipClient>(createClient);
-
+    const defaultClient = createClient();
+    const [turnipClient] = useState<TurnipClient>(defaultClient);
 
     return (
         <Context.Provider value={{
@@ -44,7 +45,7 @@ export const AppProvider = ({children}: any) => {
         }}>
             {children}
         </Context.Provider>
-    )
-}
+    );
+};
 
 export const useAppContext = () => useContext(Context);

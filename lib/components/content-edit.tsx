@@ -3,7 +3,7 @@ import React, {useRef, useState} from "react";
 import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {useAppContext} from "../util/app-context";
 import {useRouter} from "next/router";
-import {fromPairArrayToStringMap, fromStringMapToPairArray, Pair} from "../util/pair";
+import {fromPairArrayToStringMap, fromStringMapToPairArray, Pair} from "../models/pair";
 
 export enum ContentEditAction {
     Update,
@@ -127,6 +127,9 @@ export const ContentEdit = (props: ContentEditProps) => {
                         <TextField
                             label="value"
                             defaultValue={value.value}
+                            multiline
+                            fullWidth
+                            maxRows={20}
                             onChange={(newValue) => {
                                 metaList[index].value = newValue.target.value;
                             }}></TextField>

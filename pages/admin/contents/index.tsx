@@ -54,6 +54,9 @@ export default function ContentIndex() {
                 <Button onClick={() => {
                     void router.push('/admin/contents/new');
                 }}>Create new Content</Button>
+                <Button onClick={() => {
+                    void router.push('/admin/contents/new-game');
+                }}>Create new Game content</Button>
                 {createContentListUi(contentList)}
                 {/*todo: add bottom padding here*/}
             </main>

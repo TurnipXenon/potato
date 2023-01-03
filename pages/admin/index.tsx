@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from "next/head";
-import styles from '../../styles/Home.module.css'
+import styles from '../../styles/HomeIndex.module.css';
 import {useAppContext} from "../../lib/util/app-context";
 import {useRouter} from "next/router";
 import {Card, CardActionArea, CardContent} from "@mui/material";
@@ -13,7 +13,7 @@ export default function AdminIndex() {
 
     useAuthAdminRedirect();
     if (!profile) {
-        return <></>
+        return <></>;
     }
 
     return (

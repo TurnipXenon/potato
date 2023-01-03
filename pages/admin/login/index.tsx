@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Head from "next/head";
-import styles from '../../../styles/Home.module.css'
+import styles from '../../../styles/HomeIndex.module.css';
 import {Button, TextField, TextFieldProps} from "@mui/material";
 import {useAppContext} from "../../../lib/util/app-context";
 import {useRouter} from "next/router";
@@ -19,11 +19,11 @@ export default function LoginIndex() {
         if (profile) {
             void router.push("/admin/");
         }
-    }, [profile, router])
+    }, [profile, router]);
 
 
     if (profile) {
-        return <></>
+        return <></>;
     }
 
     const onClickLogin = () => {
@@ -35,7 +35,7 @@ export default function LoginIndex() {
             setProfile: setProfile!,
             setOptions: setOptions!,
         });
-    }
+    };
 
     return (
         <>

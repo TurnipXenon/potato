@@ -12,9 +12,9 @@ const useAuthAdminRedirect = () => {
         if (!profile) {
             void router.push("/admin/login/");
         }
-    }, [profile, router])
+    }, [profile, router]);
 
-    return <></>
-}
+    return <></>;
+};
 
 export default useAuthAdminRedirect;
