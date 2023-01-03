@@ -4,8 +4,8 @@ import {useRouter} from "next/router";
 import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {ContentCard} from "../../../lib/components/content-card";
 import Head from "next/head";
-import styles from "../../../styles/Home.module.css";
 import useAuthAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
+import {Button} from "@mui/material";
 
 export default function ContentIndex() {
     const {profile, turnipClient, options, setContentListProp} = useAppContext();
@@ -49,9 +49,11 @@ export default function ContentIndex() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
-                <form className={styles.center} style={{["display"]: "flex", ["flexDirection"]: "column"}}>
-                    <h1>Contents</h1>
-                </form>
+                <h1>Contents</h1>
+                <br/>
+                <Button onClick={() => {
+                    void router.push('/admin/contents/new');
+                }}>Create new Content</Button>
                 {createContentListUi(contentList)}
                 {/*todo: add bottom padding here*/}
             </main>
