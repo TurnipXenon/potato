@@ -2,7 +2,7 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {Card, CardActionArea, CardContent} from "@mui/material";
 import React, {Dispatch, SetStateAction} from "react";
 import {NextRouter} from "next/router";
-import {fromStringMapToPairArray} from "../util/pair";
+import {fromStringMapToPairArray} from "../models/pair";
 
 export interface ContentCardProps {
     content: Content;

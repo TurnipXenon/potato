@@ -11,6 +11,12 @@ export interface loginProps {
     setOptions: Dispatch<SetStateAction<RpcOptions | undefined>>;
 }
 
+export interface loginAwaitProps {
+    turnipClient: TurnipClient;
+    username: string;
+    password: string;
+}
+
 export const login = (props: loginProps) => {
     props.turnipClient.login({username: props.username, password: props.password})
         .then(response => {
@@ -21,7 +27,21 @@ export const login = (props: loginProps) => {
             });
             props.setProfile(response.response);
         }).catch(err => {
-        console.log('error', err)
+        console.log('error', err);
         // todo: relay to frontend with wrong credentials
-    })
-}
+    });
+};
+
+export const loginAwait = async (props: loginAwaitProps): Promise<RpcOptions> => {
+    // todo: this is going to crash
+    const response = await props.turnipClient.login({
+        username: props.username,
+        password: props.password
+    });
+
+    return {
+        meta: {
+            "Authorization": `Token ${response.response.token?.accessToken}`
+        }
+    };
+};
