@@ -1,0 +1,156 @@
+/*region general tags*/
+
+.homeIndex {
+  font-family: 'Nunito', serif;
+  color: aliceblue;
+  text-align: center;
+}
+
+.homeIndex h1 {
+  font-size: 2.5em;
+}
+
+.homeIndex header {
+  height: 6vh;
+}
+
+.homeIndex img, .homeIndex video {
+  max-width: var(--max-media-width);
+  max-height: var(--max-media-height);
+}
+
+.homeIndex input {
+  /*max-width: 12em;*/
+  max-height: 6em;
+  margin: 4em;
+}
+
+.homeIndex ul {
+  text-align: left;
+}
+/*endregion general tags*/
+
+/*region general classes*/
+.majorSection {
+  background-color: var(--background-color-dark);
+  padding: var(--padding-top-standard) var(--padding-side-standard) var(--padding-bottom-standard);
+  margin-bottom: var(--margin-bottom-standard);
+}
+
+.majorSection * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sidebar, .homeIndex main {
+  max-width: 50em;
+}
+
+.links {
+  display: flex;
+}
+
+.historyColumn {
+  display: flex;
+  max-width: 40em;
+}
+
+.bigFlex {
+  flex: 1;
+}
+
+
+.homeIndex .backgroundImage {
+  background: url("/background-image.jpg") no-repeat fixed center;
+  background-size: auto;
+  filter: blur(16px);
+  position: fixed;
+  z-index: -100;
+  top: -16px;
+  left: -16px;
+  max-height: initial;
+  max-width: initial;
+}
+/*endregion general classes*/
+
+/*region specific*/
+/*.background-image-container > img:first-child {*/
+/*  background: url("/public/background-image.jpg") no-repeat fixed center;*/
+/*  background-size: auto;*/
+/*  filter: blur(16px);*/
+/*  position: fixed;*/
+/*  z-index: -100;*/
+/*  top: -16px;*/
+/*  left: -16px;*/
+/*  max-height: initial;*/
+/*  max-width: initial;*/
+/*}*/
+
+/*.background-image > div:first-child {*/
+/*  background: url("/public/background-image.jpg") no-repeat fixed center;*/
+/*  background-size: auto;*/
+/*  filter: blur(16px);*/
+/*  position: fixed;*/
+/*  z-index: -100;*/
+/*  top: -16px;*/
+/*  left: -16px;*/
+/*  max-height: initial;*/
+/*  max-width: initial;*/
+/*}*/
+
+.sidebar {
+  background-color: var(--background-color-dark);
+  text-align: center;
+  padding-top: var(--padding-top-standard);
+  padding-bottom: var(--padding-bottom-standard);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--margin-bottom-standard);
+}
+
+.sidebar ul {
+  max-width: 17em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mainContainer {
+  display: flex;
+}
+
+.homeIndex main {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.about p {
+  max-width: 20em;
+}
+
+.homeIndex h1.majorSection {
+  padding: 1em 0 1em;
+  margin-top: 2em;
+}
+
+.homeIndex footer {
+  height: 30vh;
+}
+
+/*endregion specific*/
+
+/* put after everything */
+@media (min-width: 85em) {
+  .sidebar {
+    position: fixed;
+    width: var(--sidebar-big-size);
+    left: 0;
+    top: 0;
+    height: 100vh;
+    padding-top: var(--padding-top-main-header);
+  }
+
+  .mainSpace {
+    width: var(--sidebar-big-size);
+  }
+}

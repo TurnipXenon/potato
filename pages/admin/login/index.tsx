@@ -1,15 +1,15 @@
 import React, {useEffect, useRef} from 'react';
 import Head from "next/head";
-import styles from '../../../styles/Home.module.css'
+import styles from '../../../styles/HomeIndex.module.css';
 import {Button, TextField, TextFieldProps} from "@mui/material";
 import {useAppContext} from "../../../lib/util/app-context";
 import {useRouter} from "next/router";
 import {login} from "../../../lib/clients/turnip/api/login";
 
 // todo(turnip): improve layout and extract css
-export default function Login() {
+export default function LoginIndex() {
     // from Ido @ https://stackoverflow.com/a/63690287/17836168
-    const {profile, setProfile, turnipClient} = useAppContext();
+    const {profile, setProfile, turnipClient, setOptions} = useAppContext();
     const router = useRouter();
 
     const usernameRef = useRef<TextFieldProps>();
@@ -19,20 +19,23 @@ export default function Login() {
         if (profile) {
             void router.push("/admin/");
         }
-    }, [profile, router])
+    }, [profile, router]);
 
 
     if (profile) {
-        return <></>
+        return <></>;
     }
 
     const onClickLogin = () => {
         // todo: prevent double clicking using hook!
-        login(turnipClient!,
-            usernameRef.current?.value as string,
-            passwordRef.current?.value as string,
-            setProfile!);
-    }
+        login({
+            turnipClient: turnipClient!,
+            username: usernameRef.current?.value as string,
+            password: passwordRef.current?.value as string,
+            setProfile: setProfile!,
+            setOptions: setOptions!,
+        });
+    };
 
     return (
         <>
@@ -43,6 +46,7 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main>
+                {/*todo: proper onsubmit!*/}
                 <form className={styles.center} style={{["display"]: "flex", ["flexDirection"]: "column"}}>
                     <TextField name="Username" label="Username" variant="outlined" inputRef={usernameRef}/>
                     <TextField name="Password" label="Password" variant="outlined" inputRef={passwordRef}/>
