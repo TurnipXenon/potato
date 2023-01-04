@@ -13,6 +13,7 @@ import {RpcOptions} from "@protobuf-ts/runtime-rpc";
 import {loginAwait} from "../lib/clients/turnip/api/login";
 import {Content} from "turnip_api/ts/rpc/turnip/service";
 import ReactMarkdown from "react-markdown";
+import {CustomMarkdown} from "../lib/components/custom-markdown";
 
 export interface PageMetaProps {
     about: string;
@@ -66,13 +67,7 @@ export default function HomeIndex(props: HomeIndexProps) {
                         {
                             props.pageMeta.header &&
                             <section className={styles.majorSection}>
-                                <ReactMarkdown>{props.pageMeta.header}</ReactMarkdown>
-                                <video playsInline autoPlay muted loop>
-                                    <source
-                                        src="https://video.twimg.com/ext_tw_video/1318728494256410624/pu/vid/640x360/TMklz6hiTkQu3xhn.mp4"
-                                        type="video/mp4"/>
-                                    Your browser does not support the video tag.
-                                </video>
+                                <CustomMarkdown>{props.pageMeta.header}</CustomMarkdown>
                             </section>
                         }
 
