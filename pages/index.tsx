@@ -36,8 +36,6 @@ export default function HomeIndex(props: HomeIndexProps) {
                 <meta name="twitter:card" content="summary"/>
                 <link rel="icon" href="/ushi.jpg"/>
                 {/*todo: fix dynamic*/}
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito"/>
                 <meta name="twitter:site" content="@turnipxenon"/>
                 {/*todo: fix dynamic*/}
                 <meta name="twitter:creator" content="@turnipxenon"/>

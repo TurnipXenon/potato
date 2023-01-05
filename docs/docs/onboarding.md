@@ -4,6 +4,16 @@
 
 - [ ] TODO
 
+### Environment variables
+
+```
+BASE_URL=http://localhost:8000/api
+HOST_CODE=host
+REVALIDATE_TOKEN=ffffffff-ffff-ffff-ffff-ffffffffffff
+HOST_USERNAME=username
+HOST_PASSWORD=password
+```
+
 ## MKDocs
 
 You don't really need to run through this to make edits to MKDocs, but if you want to see the layout and what it looks
