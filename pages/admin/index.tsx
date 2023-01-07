@@ -1,20 +1,28 @@
 import React from 'react';
 import Head from "next/head";
 import styles from '../../styles/HomeIndex.module.css';
-import {useAppContext} from "../../lib/util/app-context";
-import {useRouter} from "next/router";
-import {Card, CardActionArea, CardContent} from "@mui/material";
 import useAuthAdminRedirect from "../../lib/util/use-auth-admin-redirect";
+import {AdminCardRedirect, AdminCardRedirectProps} from "../../lib/components/admin-card-redirect";
 
 // todo(turnip): improve layout and extract css
 export default function AdminIndex() {
-    const {profile} = useAppContext();
-    const router = useRouter();
-
-    useAuthAdminRedirect();
+    const {profile, router} = useAuthAdminRedirect();
     if (!profile) {
         return <></>;
     }
+
+    const redirectList: AdminCardRedirectProps[] = [
+        {
+            label: "Content",
+            url: "/admin/contents/",
+            router
+        },
+        {
+            label: "Revalidate path",
+            url: "/admin/revalidate/",
+            router
+        },
+    ];
 
     return (
         <>
@@ -27,17 +35,12 @@ export default function AdminIndex() {
             <main>
                 <form className={styles.center} style={{["display"]: "flex", ["flexDirection"]: "column"}}>
                     <h1>Admin</h1>
+                    {
+                        redirectList.map((value) => {
+                            return <AdminCardRedirect key={value.label} {...value}/>;
+                        })
+                    }
                 </form>
-                <Card>
-                    <CardActionArea>
-                        <CardContent
-                            onClick={() => {
-                                void router.push(`/admin/contents/`);
-                            }}>
-                            <h1>Contents</h1>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
             </main>
         </>
     );
