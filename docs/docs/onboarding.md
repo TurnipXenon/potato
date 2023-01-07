@@ -4,6 +4,17 @@
 
 - [ ] TODO
 
+### Environment variables
+
+```
+BASE_URL=http://localhost:8000/api
+HOST_CODE=host
+TURNIP_TOKEN=ffffffff-ffff-ffff-ffff-ffffffffffff
+SERVICE_NAME=turnip
+HOST_USERNAME=username
+HOST_PASSWORD=password
+```
+
 ## MKDocs
 
 You don't really need to run through this to make edits to MKDocs, but if you want to see the layout and what it looks

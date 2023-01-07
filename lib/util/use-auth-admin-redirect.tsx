@@ -1,20 +1,25 @@
-import {useAppContext} from "./app-context";
-import {useRouter} from "next/router";
+import {IAppContextData, useAppContext} from "./app-context";
+import {NextRouter, useRouter} from "next/router";
 import {useEffect} from "react";
 import React from 'react';
 
-const useAuthAdminRedirect = () => {
-    const {profile} = useAppContext();
+// todo: refactor remaining
+export interface useAuthAdminRedirectProps extends IAppContextData {
+    router: NextRouter;
+};
+
+const useAuthAdminRedirect = (): useAuthAdminRedirectProps => {
+    const context = useAppContext();
     const router = useRouter();
 
     // re-route to login if not in the right location
     useEffect(() => {
-        if (!profile) {
+        if (!context.profile) {
             void router.push("/admin/login/");
         }
-    }, [profile, router]);
+    }, [context.profile, router]);
 
-    return <></>;
+    return {router, ...context};
 };
 
 export default useAuthAdminRedirect;
