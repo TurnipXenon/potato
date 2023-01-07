@@ -1,16 +1,29 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {RevalidatePathResponse} from "potato_api/ts/rpc/potato/models";
+import {RevalidatePathResponse} from "potato_api/ts/rpc/potato/service";
+import {Server} from "@grpc/grpc-js";
 
-type ErrorMessage = {
-    message: string;
-    error_code: number;
-}
+let test: number | undefined = undefined;
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<RevalidatePathResponse>
 ) {
+    if (!test) {
+        test = 0;
+        /*
+        todo: idea for using grpc!
+        let's start the server in a different port, then we call that port? we handle the errors appropriately
+        and send the result back
+
+        possible problem: can we bind our grpc server in DigitalOcean app?
+         */
+        const server = new Server();
+        server.start();
+    }
+    test++;
+    console.log(test);
+
     const defaultResponse: RevalidatePathResponse = {
         path: "",
         serviceName: process.env.SERVICE_NAME ?? "",
