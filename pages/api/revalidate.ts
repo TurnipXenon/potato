@@ -1,66 +1,69 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type {NextApiRequest, NextApiResponse} from 'next';
+import {RevalidatePathResponse} from "potato_api/ts/rpc/potato/service";
 
-type ErrorMessage = {
-    message: string;
-    error_code: number;
-}
+let test: number | undefined = undefined;
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<ErrorMessage>
+    res: NextApiResponse<RevalidatePathResponse>
 ) {
+    const defaultResponse: RevalidatePathResponse = {
+        path: "",
+        serviceName: process.env.SERVICE_NAME ?? "",
+        message: "unknown error",
+        errorCode: 400 // todo: improve
+    };
+
     if (req.method !== 'POST') {
-        return res.status(405).json({
-            message: "method not allowed",
-            error_code: 1 // todo: improve
-        });
+        defaultResponse.message = "method not allowed";
+        defaultResponse.errorCode = 405;
+        return res.status(405).json(defaultResponse);
     }
 
     // todo: get header and do auth check
     const token: string = req.headers['authorization'] ?? "";
     if (!token) {
-        return res.status(401).json({
-            message: "unauthorized",
-            error_code: 0
-        });
+        defaultResponse.message = "unauthorized";
+        defaultResponse.errorCode = 401;
+        return res.status(401).json(defaultResponse);
     }
 
     const tokenValue: string = token.split(" ")[1] ?? "";
     if (!tokenValue) {
-        return res.status(401).json({
-            message: "unauthorized; authorization header found but no token found",
-            error_code: 1
-        });
+        defaultResponse.message = "unauthorized; authorization header found but no token found";
+        defaultResponse.errorCode = 401;
+        return res.status(401).json(defaultResponse);
     }
 
+    // todo: use the generated twirp for validation here
     const path = (req.body && req.body["path"]) ?? "";
     if (path == "") {
-        return res.status(400).json({
-            message: "empty or missing path field in json body",
-            error_code: 1
-        });
+        defaultResponse.message = "empty or missing path field in json body";
+        defaultResponse.errorCode = 401;
+        return res.status(401).json(defaultResponse);
     }
 
-    if (tokenValue !== process.env.REVALIDATE_TOKEN) {
-        return res.status(403).json({
-            message: "forbidden",
-            error_code: 1,
-        });
+    if (tokenValue !== process.env.TURNIP_TOKEN) {
+        defaultResponse.message = "forbidden";
+        defaultResponse.errorCode = 403;
+        return res.status(403).json(defaultResponse);
     }
 
     try {
         await res.revalidate(path);
-        return res.json({
+        const resp: RevalidatePathResponse = {
+            path: path,
+            serviceName: "tomato", // todo: change in the future
             message: "revalidate successful!",
-            error_code: 0,
-        });
+            errorCode: 0,
+        };
+        return res.json(resp);
     } catch (err) {
+        defaultResponse.message = "error validating path";
+        defaultResponse.errorCode = 500;
         // todo: error handling
         console.log(err);
-        return res.status(500).send({
-            message: "error validating",
-            error_code: 1,
-        });
+        return res.status(500).send(defaultResponse);
     }
 }

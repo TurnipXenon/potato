@@ -9,7 +9,8 @@
 ```
 BASE_URL=http://localhost:8000/api
 HOST_CODE=host
-REVALIDATE_TOKEN=ffffffff-ffff-ffff-ffff-ffffffffffff
+TURNIP_TOKEN=ffffffff-ffff-ffff-ffff-ffffffffffff
+SERVICE_NAME=turnip
 HOST_USERNAME=username
 HOST_PASSWORD=password
 ```
