@@ -21,7 +21,7 @@ const Context = createContext<IAppContextData>({
 });
 
 export const createClient = (): TurnipClient => {
-    const turnipUrl = process.env.BASE_URL ?? "http://localhost:8000/api";
+    const turnipUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:8000/api";
     const t = new TwirpFetchTransport({baseUrl: turnipUrl});
     console.log(`Turnip url is at ${turnipUrl}`);
     return new TurnipClient(t);
