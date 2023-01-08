@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Head from "next/head";
-import styles from '../../../styles/HomeIndex.module.css';
+import styles from '../../HomeIndex.module.css';
 import {Button, TextField, TextFieldProps} from "@mui/material";
 import {useAppContext} from "../../../lib/util/app-context";
 import {useRouter} from "next/router";

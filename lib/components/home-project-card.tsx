@@ -1,4 +1,4 @@
-import styles from "../../styles/HomeIndex.module.css";
+import styles from "../../pages/HomeIndex.module.css";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import {GameProjectProps, getProjectLinkAltText} from "../models/game-project-props";
