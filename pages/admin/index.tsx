@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from "next/head";
-import styles from '../../styles/HomeIndex.module.css';
+import styles from '../HomeIndex.module.css';
 import useAuthAdminRedirect from "../../lib/util/use-auth-admin-redirect";
 import {AdminCardRedirect, AdminCardRedirectProps} from "../../lib/components/admin-card-redirect";
 

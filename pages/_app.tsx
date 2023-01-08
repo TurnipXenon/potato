@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import './reinhard-globals.css';
 import type {AppProps} from 'next/app';
 import {createTheme, ThemeProvider} from "@mui/material";
 import {AppProvider} from "../lib/util/app-context";
