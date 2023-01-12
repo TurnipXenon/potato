@@ -1,6 +1,37 @@
-.homeIndex {
+.reinhardHome {
     /*todo: change to match tumblr*/
-    font-family: 'Nunito', serif;
-    color: #3f312f;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    background-color: var(--reinhard-main-dark);
     text-align: center;
+    padding-top: var(--padding-top-standard);
+    padding-bottom: var(--padding-bottom-standard);
+    margin-bottom: var(--margin-bottom-standard);
+    max-width: 30em;
+    border-radius: 3em;
+}
+
+.sidebarButtonContainer {
+}
+
+.sidebarButtonContainer Button {
+    background-color: var(--reinhard-secondary-medium);
+    color: var(--text-color);
+}
+
+@media (min-width: 85em) {
+    .sidebar {
+        position: fixed;
+        width: var(--sidebar-big-size);
+        left: 4em;
+        top: 4em;
+        padding-top: var(--padding-top-main-header);
+    }
+
+    .reinhardHome main {
+        margin-inline-start: 35em;
+    }
 }
