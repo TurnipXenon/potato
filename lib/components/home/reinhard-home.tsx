@@ -14,8 +14,9 @@ import {RandomizedImage} from "./randomized-image";
 import {Card, CardContent} from "@mui/material";
 import Image from "next/image";
 import {BriefGameCard} from "./brief-game-card";
-import {SiteMapButton, SiteMapButtonProps} from "./site-map-button";
 import ReactMarkdown from "react-markdown";
+import {UnderConstructionCard} from "../under-construction-card";
+import {SiteMapButtonList} from "../site-map-button-list";
 
 const shuffle = (array: any[]): any[] => {
     // from: community wiki @ https://stackoverflow.com/a/2450976/17836168
@@ -44,12 +45,6 @@ export const ReinhardHome = (props: HomeIndexProps) => {
         pineappleBgImage,
         tomatoBgImage,
         turnipBgImage
-    ];
-    const siteMapElements: SiteMapButtonProps[] = [
-        {text: "About + social", link: "/about/"},
-        {text: "Blogs", link: "/blogs/"},
-        {text: "Stuff I made", link: "/creations/"},
-        {text: "Site map", link: "/site-map/"},
     ];
 
     const [bg, setBg] = useState<JSX.Element[] | undefined>();
@@ -146,16 +141,17 @@ export const ReinhardHome = (props: HomeIndexProps) => {
                         alignItems: "center",
                         justifyContent: "center"
                     }}>
-                        {
-                            siteMapElements.map((value) => {
-                                return <SiteMapButton key={value.text} {...value}/>;
-                            })
-                        }
+                        <SiteMapButtonList shouldHaveText={true}/>
                     </div>
                 </CardContent>
             </Card>
 
             <main>
+                <UnderConstructionCard sx={{
+                    maxWidth: "40em",
+                    margin: "auto"
+                }}/>
+
                 <div style={{
                     height: "6em"
                 }}></div>

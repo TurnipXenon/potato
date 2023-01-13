@@ -1,14 +1,15 @@
 import {Card, CardActionArea, CardContent, CardMedia} from "@mui/material";
 
-import aresImage from "../../../public/ares.jpg";
+import aresImage from "../../public/ares.jpg";
 import {useRouter} from "next/router";
 
 export interface SiteMapButtonProps {
     text: string;
     link: string;
+    shouldHaveText?: boolean;
 }
 
-export const SiteMapButton = (props: SiteMapButtonProps) => {
+export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
     const router = useRouter();
 
     return (
@@ -36,11 +37,14 @@ export const SiteMapButton = (props: SiteMapButtonProps) => {
                         width: "7.5em",
                     }}
                 ></CardMedia>
-                <CardContent sx={{
-                    flex: "1"
-                }}>
-                    {props.text}
-                </CardContent>
+                {
+                    props.shouldHaveText &&
+                    <CardContent sx={{
+                        flex: "1"
+                    }}>
+                        {props.text}
+                    </CardContent>
+                }
             </CardActionArea>
         </Card>
     );
