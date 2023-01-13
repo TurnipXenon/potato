@@ -100,7 +100,7 @@ export const ContentEdit = (props: ContentEditProps) => {
                 {tagList.map((value, index) => {
                     return (<ListItem key={value}>
                         <Button onClick={() => {
-                            tagList.splice(index);
+                            tagList.splice(index, 1);
                             setTagList([...tagList]);
                         }}>-</Button>
                         <TextField

@@ -2,7 +2,6 @@ import {UnderConstructionCard} from "../../lib/components/under-construction-car
 import {GetStaticProps} from "next";
 import {createServerSideClient} from "../../lib/util/create-server-side-client";
 import {PageMetaProps} from "../index";
-import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {Card} from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import {SxProps} from "@mui/system";
