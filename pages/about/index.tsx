@@ -7,58 +7,10 @@ import {Card} from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import {SxProps} from "@mui/system";
 import {Theme} from "@mui/material/styles";
-import {SiteMapButtonList} from "../../lib/components/site-map-button-list";
+import {PageWrapper} from "../../lib/components/page-wrapper";
 
 export interface AboutIndexProps {
     pageMeta: PageMetaProps;
-}
-
-export default function AboutIndex(props: AboutIndexProps) {
-    const defaultStyle: SxProps<Theme> = {
-        textAlign: "center",
-        margin: "2em auto",
-        padding: "2em",
-        width: "40em"
-    };
-
-    return (
-        <main style={{
-            display: "flex",
-            textAlign: "center",
-            justifyContent: "center",
-            flexDirection: "column"
-        }}>
-            <UnderConstructionCard sx={defaultStyle}/>
-
-            {
-                props.pageMeta.about &&
-                <Card sx={defaultStyle}>
-                    <ReactMarkdown>
-                        {props.pageMeta.about}
-                    </ReactMarkdown>
-                </Card>
-            }
-
-            {
-                props.pageMeta.about &&
-                <Card sx={defaultStyle}>
-                    <ReactMarkdown>
-                        {props.pageMeta.social}
-                    </ReactMarkdown>
-                </Card>
-            }
-
-            <div style={{
-                position: "fixed",
-                bottom: "0",
-                right: "0",
-                display: "flex",
-                flexDirection: "column"
-            }}>
-                <SiteMapButtonList/>
-            </div>
-        </main>
-    );
 }
 
 export const getStaticProps: GetStaticProps<AboutIndexProps> = async () => {
@@ -68,7 +20,6 @@ export const getStaticProps: GetStaticProps<AboutIndexProps> = async () => {
     }, options).response;
 
     // todo response.itemList: Content -> GameProjectProp
-    const gameRawList: Content[] = [];
     const pageMeta: PageMetaProps = {
         about: "",
         header: "",
@@ -89,3 +40,44 @@ export const getStaticProps: GetStaticProps<AboutIndexProps> = async () => {
         },
     };
 };
+
+
+export default function AboutIndex(props: AboutIndexProps) {
+    const defaultStyle: SxProps<Theme> = {
+        textAlign: "center",
+        margin: "2em auto",
+        padding: "2em",
+        width: "40em"
+    };
+
+    return (
+        <PageWrapper>
+            <main style={{
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+                flexDirection: "column"
+            }}>
+                <UnderConstructionCard sx={defaultStyle}/>
+
+                {
+                    props.pageMeta.about &&
+                    <Card sx={defaultStyle}>
+                        <ReactMarkdown>
+                            {props.pageMeta.about}
+                        </ReactMarkdown>
+                    </Card>
+                }
+
+                {
+                    props.pageMeta.about &&
+                    <Card sx={defaultStyle}>
+                        <ReactMarkdown>
+                            {props.pageMeta.social}
+                        </ReactMarkdown>
+                    </Card>
+                }
+            </main>
+        </PageWrapper>
+    );
+}
