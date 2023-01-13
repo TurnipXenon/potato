@@ -7,6 +7,7 @@ export interface SiteMapButtonProps {
     text: string;
     link: string;
     shouldHaveText?: boolean;
+    imgSrc?: string;
 }
 
 export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
@@ -16,7 +17,9 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
         <Card sx={{
             borderRadius: "2em",
             height: "6em",
-            backgroundColor: "var(--reinhard-secondary-medium)"
+            backgroundColor: "var(--reinhard-secondary-medium)",
+            // border: "var(--normal-border)",
+            boxShadow: "none"
         }}>
             <CardActionArea
                 onClick={() => {
@@ -32,7 +35,7 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
                 <CardMedia
                     component={"img"}
                     alt={"todo:"}
-                    src={aresImage.src}
+                    src={props.imgSrc ?? aresImage.src}
                     sx={{
                         width: "7.5em",
                     }}
@@ -40,7 +43,8 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
                 {
                     props.shouldHaveText &&
                     <CardContent sx={{
-                        flex: "1"
+                        flex: "1",
+                        fontSize: "1.3em"
                     }}>
                         {props.text}
                     </CardContent>

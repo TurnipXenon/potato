@@ -5,7 +5,7 @@
 }
 
 .sidebar {
-    background-color: var(--reinhard-main-dark);
+    background-color: var(--reinhard-main-light);
     text-align: center;
     padding-top: var(--padding-top-standard);
     padding-bottom: var(--padding-bottom-standard);
