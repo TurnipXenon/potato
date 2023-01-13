@@ -7,9 +7,15 @@ import cornBgImage from "../../../public/home/bg_tiled/bg_tiled_corn.png";
 import pineappleBgImage from "../../../public/home/bg_tiled/bg_tiled_pineapple.png";
 import tomatoBgImage from "../../../public/home/bg_tiled/bg_tiled_tomato.png";
 import turnipBgImage from "../../../public/home/bg_tiled/bg_tiled_turnip.png";
+import aresImage from "../../../public/ares.jpg";
 import styles from "../../../pages/ReinhardHome.module.css";
 import useEffectOnce from "../../util/use-effect-once";
 import {RandomizedImage} from "./randomized-image";
+import {Card, CardContent} from "@mui/material";
+import Image from "next/image";
+import {BriefGameCard} from "./brief-game-card";
+import {SiteMapButton, SiteMapButtonProps} from "./site-map-button";
+import ReactMarkdown from "react-markdown";
 
 const shuffle = (array: any[]): any[] => {
     // from: community wiki @ https://stackoverflow.com/a/2450976/17836168
@@ -39,68 +45,165 @@ export const ReinhardHome = (props: HomeIndexProps) => {
         tomatoBgImage,
         turnipBgImage
     ];
+    const siteMapElements: SiteMapButtonProps[] = [
+        {text: "About + social", link: "/about/"},
+        {text: "Blogs", link: "/blogs/"},
+        {text: "Stuff I made", link: "/creations/"},
+        {text: "Site map", link: "/site-map/"},
+    ];
 
     const [bg, setBg] = useState<JSX.Element[] | undefined>();
 
     useEffectOnce(() => {
+        if (bg) {
+            return;
+        }
+
         let props: JSX.Element[] = [];
-        // todo: randomization
 
         for (let i = 0; i < 20; i++) {
             shuffle(imageList);
-            // todo: add rotation random
-            // todo: add spacing random
             props = props.concat(imageList.map((value, index) => {
-                return <RandomizedImage key={index} src={value}/>;
+                return <RandomizedImage key={index + (i * props.length)} src={value}/>;
             }));
         }
         setBg(props);
     });
 
-    // todo: async generate background
+    // todo: refactor css styles
 
-    return (<>
-            <Head>
-                <title>turnip</title> {/*todo: fix dynamic*/}
-                <meta charSet="utf-8"/>
-                <link rel="icon" href="/ushi.jpg"/>
-                {/* todo: all the other twitter card props */}
-            </Head>
+    return <>
+        <Head>
+            <title>turnip</title> {/*todo: fix dynamic*/}
+            <meta charSet="utf-8"/>
+            <link rel="icon" href="/ushi.jpg"/>
+            {/* todo: all the other twitter card props */}
+        </Head>
 
-            <div className={styles.homeIndex}>
-                <div style={{position: "relative"}}>
+        <div className={`reinhardGlobal ${styles.reinhardHome}`}>
+            <div style={{position: "relative", zIndex: -10}}>
+                <div style={{
+                    position: "fixed",
+                    marginLeft: "-225px",
+                    width: "2270px",
+                    height: "1080px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    overflow: "hidden"
+                }}>
+                    {
+                        bg
+                    }
+                </div>
+            </div>
+
+            <Card className={styles.sidebar} style={{
+                margin: "auto"
+            }}>
+                <CardContent>
+                    {/*todo: find a way to make the image mesh better with the color scheme like in AC*/}
                     <div style={{
-                        position: "fixed",
-                        marginLeft: "-225px",
-                        width: "2270px",
-                        height: "1080px",
                         display: "flex",
-                        flexWrap: "wrap",
+                        alignItems: "center",
                         justifyContent: "center",
-                        overflow: "hidden"
+                    }}>
+
+                        <Image src={aresImage} alt="Ares from Rune Factory 5" style={{
+                            border: "0.5em solid var(--reinhard-secondary-dark)",
+                            borderRadius: "50%",
+                            width: "10em",
+                            height: "10em",
+                            zIndex: 10
+                        }}/>
+                        <Card style={{
+                            paddingInlineStart: "5em",
+                            marginInlineStart: "-4em",
+                            paddingInlineEnd: "2em",
+                            borderRadius: "3em",
+                            minWidth: "10em",
+                            backgroundColor: "var(--reinhard-secondary-dark)"
+                        }}>
+                            <CardContent>
+                                <h1 style={{
+                                    marginTop: "0",
+                                    marginBottom: "0",
+                                }}>Turnip</h1>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    <div style={{height: "3em"}}></div>
+                    <ReactMarkdown>
+                        {props.pageMeta.aboutLite}
+                    </ReactMarkdown>
+                    <div style={{height: "2em"}}></div>
+
+                    <div className={styles.sidebarButtonContainer} style={{
+                        display: "grid",
+                        gridAutoFlow: "row",
+                        gridTemplateColumns: "12em 12em",
+                        gridGap: "1em",
+                        alignItems: "center",
+                        justifyContent: "center"
                     }}>
                         {
-                            bg
+                            siteMapElements.map((value) => {
+                                return <SiteMapButton key={value.text} {...value}/>;
+                            })
                         }
                     </div>
-                </div>
+                </CardContent>
+            </Card>
 
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-                <p>Testing</p>
-            </div>
-        </>
-    );
+            <main>
+                <div style={{
+                    height: "6em"
+                }}></div>
+                <section style={{
+                    border: "0.5em solid var(--text-color)",
+                    borderRadius: "2em",
+                    marginLeft: "3em",
+                    marginRight: "3em",
+                    backgroundColor: "var(--reinhard-blue-transparent)",
+                }}>
+                    <Card style={{
+                        border: "0.5em solid var(--text-color)",
+                        marginTop: "-4em",
+                        display: "inline-block",
+                        paddingLeft: "2em",
+                        paddingRight: "2em",
+                        borderRadius: "2em",
+                        backgroundColor: "var(--reinhard-blue)",
+                    }}>
+                        <CardContent>
+                            <h1>Games I{"'"}ve made {">"}:3c</h1>
+                        </CardContent>
+                    </Card>
+
+                    <div style={{
+                        height: "2em"
+                    }}></div>
+
+                    <div style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center"
+                    }}>
+                        {
+                            props.gameProjectList.map((value) => {
+                                return <BriefGameCard key={value.title} project={value}/>;
+                            })
+                        }
+                    </div>
+
+                    <div style={{
+                        height: "2em"
+                    }}></div>
+
+
+                </section>
+            </main>
+
+        </div>
+    </>;
 };

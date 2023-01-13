@@ -10,6 +10,7 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import {ReinhardHome} from "../lib/components/home/reinhard-home";
 
 export interface PageMetaProps {
+    aboutLite: string;
     about: string;
     header: string;
     social: string;
@@ -55,13 +56,15 @@ export const getStaticProps: GetStaticProps<HomeIndexProps> = async () => {
     const pageMeta: PageMetaProps = {
         about: "",
         header: "",
-        social: ""
+        social: "",
+        aboutLite: "",
     };
     for (const content of response.itemList) {
         if (content.tagList.includes("game")) {
             gameRawList.push(content);
         } else if (content.title === `${hostCode} home`) {
             pageMeta.about = content.meta['about'] ?? "";
+            pageMeta.aboutLite = content.meta['about-lite'] ?? "";
             pageMeta.header = content.meta['header'] ?? "";
             pageMeta.social = content.meta['social'] ?? "";
         }
