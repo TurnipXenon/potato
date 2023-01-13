@@ -1,15 +1,25 @@
 import {Card} from "@mui/material";
+import {SxProps} from "@mui/system";
+import {Theme} from "@mui/material/styles";
 
 export interface UnderConstructionCardProps {
     optionalMessage?: string;
+    sx?: SxProps<Theme>;
 }
 
 export const UnderConstructionCard = (props: UnderConstructionCardProps) => {
-    return <Card sx={{
+    const defaultStyles: SxProps<Theme> = {
         textAlign: "Center",
         padding: "2em",
         margin: "2em"
-    }}>
+    };
+    let defaultProps = defaultStyles;
+
+    if (props.sx) {
+        defaultProps = Object.assign({}, defaultStyles, props.sx);
+    }
+
+    return <Card sx={defaultProps}>
         <h1>⚠CONSTRUCTION⚠</h1>
 
         <p>We are currently under the process of making this webpage. Thank you for your patience. 🙇‍♂️</p>
