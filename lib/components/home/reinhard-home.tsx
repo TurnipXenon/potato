@@ -212,7 +212,7 @@ export const ReinhardHome = (props: HomeIndexProps) => {
             </main>
 
             <div style={{
-                height:"40vh",
+                height: "40vh",
             }}></div>
 
         </div>

@@ -17,7 +17,7 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
         <Card sx={{
             borderRadius: "2em",
             height: "6em",
-            backgroundColor: "var(--reinhard-secondary-medium)",
+            backgroundColor: "rgba(255, 255, 255, 0)",
             // border: "var(--normal-border)",
             boxShadow: "none"
         }}>
@@ -29,7 +29,6 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
                     display: "flex",
                     width: "100%",
                     height: "100%",
-                    backgroundColor: "var(--reinhard-secondary-medium)",
                     textAlign: "start",
                 }}>
                 <CardMedia
@@ -44,7 +43,8 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
                     props.shouldHaveText &&
                     <CardContent sx={{
                         flex: "1",
-                        fontSize: "1.3em"
+                        fontSize: "1.3em",
+                        backgroundColor: "var(--reinhard-secondary-medium)",
                     }}>
                         {props.text}
                     </CardContent>
