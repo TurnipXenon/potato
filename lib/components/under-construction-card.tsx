@@ -29,7 +29,11 @@ export const UnderConstructionCard = (props: UnderConstructionCardProps) => {
             <p>{props.optionalMessage}</p>
         }
 
-        <video playsInline={true} autoPlay={true} loop={true} muted={true}>
+        <video playsInline={true} autoPlay={true} loop={true} muted={true}
+                style={{
+                    width: "auto",
+                    maxHeight: "10em"
+                }}>
             <source
                 src="https://video.twimg.com/ext_tw_video/1318728494256410624/pu/vid/640x360/TMklz6hiTkQu3xhn.mp4"
                 type="video/mp4"/>

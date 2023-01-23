@@ -27,6 +27,8 @@
     --reinhard-secondary-medium: #cd7949;
     --reinhard-secondary-dark: #b55639;
     --text-color: #3f312f;
+    --normal-border: 0.3em solid var(--text-color);
+    /*--normal-border: none;*/
 }
 
 body {

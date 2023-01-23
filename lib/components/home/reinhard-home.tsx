@@ -94,49 +94,59 @@ export const ReinhardHome = (props: HomeIndexProps) => {
             </div>
 
             <Card className={styles.sidebar} style={{
-                margin: "auto"
+                margin: "4em auto",
+                paddingTop: "1em",
             }}>
                 <CardContent>
                     {/*todo: find a way to make the image mesh better with the color scheme like in AC*/}
                     <div style={{
                         display: "flex",
-                        alignItems: "center",
                         justifyContent: "center",
                     }}>
 
                         <Image src={aresImage} alt="Ares from Rune Factory 5" style={{
-                            border: "0.5em solid var(--reinhard-secondary-dark)",
+                            border: "0.4em solid var(--reinhard-secondary-dark)",
                             borderRadius: "50%",
-                            width: "10em",
-                            height: "10em",
+                            width: "7em",
+                            height: "7em",
                             zIndex: 10
                         }}/>
                         <Card style={{
                             paddingInlineStart: "5em",
-                            marginInlineStart: "-4em",
+                            marginInlineStart: "-6.5em",
                             paddingInlineEnd: "2em",
-                            borderRadius: "3em",
+                            borderRadius: "5em",
                             minWidth: "10em",
-                            backgroundColor: "var(--reinhard-secondary-dark)"
+                            backgroundColor: "var(--reinhard-secondary-dark)",
+                            boxShadow: "none"
                         }}>
-                            <CardContent>
-                                <h1 style={{
-                                    marginTop: "0",
+                            <CardContent style={{
+                                height: "100%",
+                                alignItems: "center",
+                                display: "flex"
+                            }}>
+                                <div style={{
+                                    marginTop: "-2em",
                                     marginBottom: "0",
-                                }}>Turnip</h1>
+                                    marginInlineStart: "2em"
+                                }}>
+                                    <h1>Turnip</h1>
+                                </div>
                             </CardContent>
                         </Card>
                     </div>
-                    <div style={{height: "3em"}}></div>
-                    <ReactMarkdown>
-                        {props.pageMeta.aboutLite}
-                    </ReactMarkdown>
+                    <div style={{height: "1em"}}></div>
+                    <div style={{maxWidth: "24em", margin: "auto"}}>
+                        <ReactMarkdown>
+                            {props.pageMeta.aboutLite}
+                        </ReactMarkdown>
+                    </div>
                     <div style={{height: "2em"}}></div>
 
                     <div className={styles.sidebarButtonContainer} style={{
-                        display: "grid",
-                        gridAutoFlow: "row",
-                        gridTemplateColumns: "12em 12em",
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
                         gridGap: "1em",
                         alignItems: "center",
                         justifyContent: "center"
@@ -146,22 +156,19 @@ export const ReinhardHome = (props: HomeIndexProps) => {
                 </CardContent>
             </Card>
 
-            <main>
+            <main style={{
+                marginTop: "4em"
+            }}>
                 <UnderConstructionCard sx={{
                     maxWidth: "40em",
-                    margin: "auto"
+                    margin: "auto",
+                    marginBottom: "4em"
                 }}/>
 
                 <div style={{
                     height: "6em"
                 }}></div>
-                <section style={{
-                    border: "0.5em solid var(--text-color)",
-                    borderRadius: "2em",
-                    marginLeft: "3em",
-                    marginRight: "3em",
-                    backgroundColor: "var(--reinhard-blue-transparent)",
-                }}>
+                <section className={styles.majorSectionCard}>
                     <Card style={{
                         border: "0.5em solid var(--text-color)",
                         marginTop: "-4em",
@@ -195,10 +202,12 @@ export const ReinhardHome = (props: HomeIndexProps) => {
                     <div style={{
                         height: "2em"
                     }}></div>
-
-
                 </section>
             </main>
+
+            <div style={{
+                height: "40vh",
+            }}></div>
 
         </div>
     </>;
