@@ -56,7 +56,9 @@ export const ContentEdit = (props: ContentEditProps) => {
     };
 
     return (
-        <div className={"blockAllChildren"}>
+        <div className={"blockAllChildren"} style={{
+            padding: "2em"
+        }}>
 
             {/*todo: expand text field*/}
             <TextField name="Title"
@@ -73,7 +75,10 @@ export const ContentEdit = (props: ContentEditProps) => {
                 multiline
                 maxRows={10}
                 defaultValue={content.content}
-                style={{marginBottom: "1em"}}
+                style={{
+                    marginBottom: "1em",
+                    width: "100%",
+                }}
                 inputRef={contentRef}
             />
             <TextField
@@ -83,7 +88,10 @@ export const ContentEdit = (props: ContentEditProps) => {
                 multiline
                 maxRows={10}
                 defaultValue={content.description}
-                style={{marginBottom: "1em"}}
+                style={{
+                    marginBottom: "1em",
+                    marginTop: "1em"
+                }}
                 inputRef={descriptionRef}
             />
             <h3>Media (TODO)</h3>
@@ -92,7 +100,7 @@ export const ContentEdit = (props: ContentEditProps) => {
                 {tagList.map((value, index) => {
                     return (<ListItem key={value}>
                         <Button onClick={() => {
-                            tagList.splice(index);
+                            tagList.splice(index, 1);
                             setTagList([...tagList]);
                         }}>-</Button>
                         <TextField

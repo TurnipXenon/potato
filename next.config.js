@@ -13,6 +13,12 @@ module.exports = {
                 port: '',
                 pathname: '/media/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'static.itch.io',
+                port: '',
+                pathname: '/images/**',
+            },
         ],
     },
 };

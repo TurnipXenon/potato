@@ -1,0 +1,84 @@
+.reinhardHome {
+    /*todo: change to match tumblr*/
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    background-color: var(--reinhard-main-light);
+    text-align: center;
+    padding-top: var(--padding-top-standard);
+    padding-bottom: var(--padding-bottom-standard);
+    margin-bottom: var(--margin-bottom-standard);
+    max-width: 30em;
+    border-radius: 3em;
+}
+
+.sidebarButtonContainer {
+    /*for nextjs*/
+}
+
+.siteMapButtonComponent {
+    /*for nextjs*/
+}
+
+.briefCardGameContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: var(--reinhard-main-dark);
+    padding: 1em;
+}
+
+.briefCardGameContent div {
+    flex: 1;
+    flex-basis: 40%;
+}
+
+.sidebarButtonContainer Button {
+    background-color: var(--reinhard-secondary-medium);
+    color: var(--text-color);
+}
+
+.sidebarButtonContainer .siteMapButtonComponent {
+    flex-basis: 50%;
+    max-width: 12em;
+    max-height: 12em;
+}
+
+.majorSectionCard {
+    border: var(--normal-border);
+    border-radius: 2em;
+    margin-left: 3em;
+    margin-right: 3em;
+    background-color: var(--reinhard-blue-transparent);
+    min-width: 15em;
+}
+
+/* for wide screens */
+@media (min-width: 85em) {
+    .sidebar {
+        position: fixed;
+        width: var(--sidebar-big-size);
+        left: 4em;
+        top: 4em;
+        padding-top: var(--padding-top-main-header);
+    }
+
+    .reinhardHome main {
+        margin-inline-start: 35em;
+    }
+}
+
+/*todo: make the border disappearance more gradual*/
+/* for phone screens */
+@media (max-width: 40em) {
+    .majorSectionCard {
+        border: var(--normal-border);
+        border-radius: 2em;
+        margin-left: -1em;
+        margin-right: -1em;
+        background-color: var(--reinhard-blue-transparent);
+        min-width: 15em;
+    }
+}
