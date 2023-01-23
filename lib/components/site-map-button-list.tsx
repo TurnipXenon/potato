@@ -21,7 +21,10 @@ export const SiteMapButtonList = (props: SiteMapButtonTrayProps) => {
     return <>
         {
             siteMapElements.map((value) => {
-                return <SiteMapButtonComponent key={value.text} shouldHaveText={props.shouldHaveText} {...value}/>;
+                return <SiteMapButtonComponent
+                    key={value.text}
+                    shouldHaveText={props.shouldHaveText}
+                    {...value}/>;
             })
         }
     </>;

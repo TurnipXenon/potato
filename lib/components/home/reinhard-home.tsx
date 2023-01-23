@@ -101,7 +101,6 @@ export const ReinhardHome = (props: HomeIndexProps) => {
                     {/*todo: find a way to make the image mesh better with the color scheme like in AC*/}
                     <div style={{
                         display: "flex",
-                        // alignItems: "center",
                         justifyContent: "center",
                     }}>
 
@@ -145,9 +144,9 @@ export const ReinhardHome = (props: HomeIndexProps) => {
                     <div style={{height: "2em"}}></div>
 
                     <div className={styles.sidebarButtonContainer} style={{
-                        display: "grid",
-                        gridAutoFlow: "row",
-                        gridTemplateColumns: "12em 12em",
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
                         gridGap: "1em",
                         alignItems: "center",
                         justifyContent: "center"
@@ -158,23 +157,18 @@ export const ReinhardHome = (props: HomeIndexProps) => {
             </Card>
 
             <main style={{
-                paddingTop: "4em"
+                marginTop: "4em"
             }}>
                 <UnderConstructionCard sx={{
                     maxWidth: "40em",
-                    margin: "auto"
+                    margin: "auto",
+                    marginBottom: "4em"
                 }}/>
 
                 <div style={{
                     height: "6em"
                 }}></div>
-                <section style={{
-                    border: "var(--normal-border)",
-                    borderRadius: "2em",
-                    marginLeft: "3em",
-                    marginRight: "3em",
-                    backgroundColor: "var(--reinhard-blue-transparent)",
-                }}>
+                <section className={styles.majorSectionCard}>
                     <Card style={{
                         border: "0.5em solid var(--text-color)",
                         marginTop: "-4em",

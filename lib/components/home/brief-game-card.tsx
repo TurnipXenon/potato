@@ -1,8 +1,9 @@
-import {Card, CardContent} from "@mui/material";
+import {Card} from "@mui/material";
 import Image from "next/image";
 import aresImage from "../../../public/ares.jpg";
 import React, {useState} from "react";
 import {GameProjectProps, getProjectLinkAltText} from "../../models/game-project-props";
+import styles from "../../../pages/ReinhardHome.module.css";
 
 export interface BriefGameCardProps {
     project: GameProjectProps,
@@ -51,72 +52,57 @@ export const BriefGameCard = (props: BriefGameCardProps) => {
             margin: "2em",
             transform: `rotate(${deg}deg)`
         }}>
-            <CardContent style={{
-                padding: "0"
-            }}>
-                <div style={{height: "2em"}}></div>
-                <article>
-                    <div style={{
-                        display: "flex",
-                        backgroundColor: "var(--reinhard-main-dark)",
-                        padding: "1em"
-                    }}>
-                        <div>
-                            {
-                                thumbnail
-                            }
-                            {/*<Image src={aresImage} alt="Ares from Rune Factory 5" style={{*/}
-                            {/*    border: "0.5em solid var(--reinhard-bg)",*/}
-                            {/*    borderRadius: "2em",*/}
-                            {/*    width: "10em",*/}
-                            {/*    height: "10em",*/}
-                            {/*    zIndex: 10*/}
-                            {/*}}/>*/}
-                            {/*    todo image here*/}
-                        </div>
-                        <div style={{
-                            textAlign: "start",
-                            padding: "1em"
-                        }}>
-                            <div
-                                style={{
-                                    backgroundColor: "var(--reinhard-main-light)",
-                                    display: "inline-block",
-                                    borderRadius: "0.75em"
-                                }}>
-                                <h1 style={{
-                                    margin: "0.25em 0.5em"
-                                }}>{props.project.title}</h1>
-                            </div>
-                            <p>{props.project.tagline}</p>
-                        </div>
-                    </div>
+            <div style={{height: "2em"}}></div>
+            <article>
 
-                    <div style={{
-                        display: "flex",
-                        padding: "1em"
-                    }}>
+                <div className={styles.briefCardGameContent}>
+                    <div>
                         {
-                            props.project.linkList.map((value, index) => {
-                                const link = value.link.includes("https://") ? value.link : `https://${value.link}`;
-                                return <div key={value.link} style={{
-                                    margin: "0.5em"
-                                }}>
-                                    <a href={link}>
-                                        <img
-                                            src={value.externalBadge.imageLink}
-                                            style={{
-                                                maxHeight: "3em"
-                                            }}
-                                            alt={getProjectLinkAltText(value, props.project)}
-                                        />
-                                    </a>
-                                </div>;
-                            })
+                            thumbnail
                         }
                     </div>
-                </article>
-            </CardContent>
+                    <div style={{
+                        textAlign: "start",
+                        padding: "1em"
+                    }}>
+                        <div
+                            style={{
+                                backgroundColor: "var(--reinhard-main-light)",
+                                display: "inline-block",
+                                borderRadius: "0.75em"
+                            }}>
+                            <h1 style={{
+                                margin: "0.25em 0.5em"
+                            }}>{props.project.title}</h1>
+                        </div>
+                        <p>{props.project.tagline}</p>
+                    </div>
+                </div>
+
+                <div style={{
+                    display: "flex",
+                    padding: "1em"
+                }}>
+                    {
+                        props.project.linkList.map((value, index) => {
+                            const link = value.link.includes("https://") ? value.link : `https://${value.link}`;
+                            return <div key={value.link} style={{
+                                margin: "0.5em"
+                            }}>
+                                <a href={link}>
+                                    <img
+                                        src={value.externalBadge.imageLink}
+                                        style={{
+                                            maxHeight: "3em"
+                                        }}
+                                        alt={getProjectLinkAltText(value, props.project)}
+                                    />
+                                </a>
+                            </div>;
+                        })
+                    }
+                </div>
+            </article>
         </Card>
     );
 };
