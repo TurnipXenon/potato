@@ -23,6 +23,7 @@ export const ContentEdit = (props: ContentEditProps) => {
     const titleRef = useRef<TextFieldProps>();
     const contentRef = useRef<TextFieldProps>();
     const descriptionRef = useRef<TextFieldProps>();
+    const slugRef = useRef<TextFieldProps>();
     const [tagList, setTagList] = useState<string[]>(content.tagList);
     const [metaList, setMetaList] = useState<Pair<string, string>[]>(
         fromStringMapToPairArray(content.meta));
@@ -38,6 +39,7 @@ export const ContentEdit = (props: ContentEditProps) => {
             meta: fromPairArrayToStringMap(metaList),
             primaryId: content.primaryId,
             authorId: content.authorId,
+            slug: slugRef.current?.value as string,
         };
 
         const promise = (props.action === ContentEditAction.Create) ?
@@ -65,7 +67,10 @@ export const ContentEdit = (props: ContentEditProps) => {
                        label="Title"
                        variant="outlined"
                        defaultValue={content.title}
-                       style={{marginBottom: "1em"}}
+                       style={{
+                           marginBottom: "1em",
+                           width: "100%"
+                       }}
                        inputRef={titleRef}
             />
             <TextField
@@ -90,9 +95,22 @@ export const ContentEdit = (props: ContentEditProps) => {
                 defaultValue={content.description}
                 style={{
                     marginBottom: "1em",
-                    marginTop: "1em"
+                    marginTop: "1em",
+                    width: "100%"
                 }}
                 inputRef={descriptionRef}
+            />
+            <TextField
+                id="outlined-multiline-flexible"
+                name="Slug"
+                label="Slug"
+                defaultValue={content.slug}
+                style={{
+                    marginBottom: "1em",
+                    marginTop: "1em",
+                    width: "100%"
+                }}
+                inputRef={slugRef}
             />
             <h3>Media (TODO)</h3>
             <h3>Tags</h3>

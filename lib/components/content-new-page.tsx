@@ -4,6 +4,7 @@ import {Content} from "turnip_api/ts/rpc/turnip/service";
 import useAuthAdminRedirect from "../util/use-auth-admin-redirect";
 import Head from "next/head";
 import {ContentEdit, ContentEditAction} from "./content-edit";
+import {ContentUtil} from "../util/content-util";
 
 export interface ContentNewPageProps {
     content?: Content;
@@ -16,15 +17,7 @@ export const ContentNewPage = (props: ContentNewPageProps) => {
             return props.content;
         }
 
-        return {
-            title: "",
-            description: "",
-            content: "",
-            tagList: [],
-            meta: {},
-            primaryId: "10000000-0000-0000-0000-e4d1a9ddc777", // todo: make this optional
-            authorId: "",
-        };
+        return ContentUtil.createDefaultContent();
     })());
 
     useAuthAdminRedirect();

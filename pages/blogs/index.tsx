@@ -27,13 +27,13 @@ export const getStaticProps: GetStaticProps<BlogsIndexProps> = async (context) =
 
     const contentList: BlogBlurb[] = [];
     for (const pbContent of response.itemList) {
-        if (pbContent.meta["slug"]) {
+        if (pbContent.slug) {
             contentList.push({
                 title: pbContent.title,
                 description: pbContent.description,
                 blurb: pbContent.meta["blurb"] ?? "",
                 tagList: pbContent.tagList, // todo sanitize tag list!
-                slug: pbContent.meta["slug"],
+                slug: pbContent.slug,
             });
         }
     }

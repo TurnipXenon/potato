@@ -6,21 +6,14 @@ import useEffectOnce from "../../../lib/util/use-effect-once";
 import useAuthAdminRedirect from "../../../lib/util/use-auth-admin-redirect";
 import {ContentEdit} from "../../../lib/components/content-edit";
 import Head from "next/head";
+import {ContentUtil} from "../../../lib/util/content-util";
 
 export default function ContentSlug() {
     const {profile, contentListProp, setContentListProp} = useAppContext();
     // todo: refactor
     const [content] = useState<Content>((() => {
         if (contentListProp.length !== 1) {
-            return {
-                title: "",
-                description: "",
-                content: "",
-                tagList: [],
-                meta: {"client_error": "wrong contentListProp set"},
-                primaryId: "",
-                authorId: "",
-            };
+            return ContentUtil.createClientErrorContent("wrong contentListProp set");
         }
         return contentListProp[0];
     })());

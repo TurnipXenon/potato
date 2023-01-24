@@ -31,14 +31,12 @@ export const ContentCard = (props: ContentCardProps) => {
                         })}
                     </ul>
                     <br/>
-                    <h2>AccessDetails</h2>
-                    {content.accessDetails}
-                    <br/>
                     <h2>Metadata</h2>
                     <ul>
                         <li>Author ID: {content.authorId}</li>
                         <li>Primary ID: {content.primaryId}</li>
                         <li>Description: {content.description}</li>
+                        <li>Slug: {content.slug ? content.slug : "N/A"}</li>
                         {
                             fromStringMapToPairArray(content.meta).map((value, index) => {
                                 return <li key={value.key}>{value.key}: {value.value}</li>;
