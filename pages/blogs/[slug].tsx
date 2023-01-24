@@ -6,6 +6,7 @@ import {Content} from 'turnip_api/ts/rpc/turnip/service';
 import {FsCache, SlugIdPairMap} from "../../lib/util/fs-cache";
 import ReactMarkdown from "react-markdown";
 import {PageWrapper} from "../../lib/components/page-wrapper";
+import {ContentUtil} from "../../lib/util/content-util";
 
 export interface BlogSlugProps {
     content: Content;
@@ -17,15 +18,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const response = await turnipClient.getContentsByTagStrict({
         tagList: [hostCode, "blogs"]
     }, options).response;
+    // todo: make faster by only querying for entries with slug
 
     const slugToId: SlugIdPairMap = {};
     const paths: Array<string | { params: ParsedUrlQuery, locale?: string }> = [];
     for (const content of response.itemList) {
-        if (content.meta["slug"]) {
-            slugToId[content.meta["slug"]] = content.primaryId;
+        if (content.slug) {
+            slugToId[content.slug] = content.primaryId;
             paths.push({
                 params: {
-                    slug: content.meta["slug"],
+                    slug: content.slug,
                     id: content.primaryId
                 }
             });
@@ -42,21 +44,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const getErrorItem: GetStaticProps<BlogSlugProps> = () => {
     return {
         props: {
-            content: {
-                title: "",
-                description: "",
-                content: "Hi! error lol",
-                tagList: [],
-                meta: {},
-                primaryId: "",
-                authorId: "",
-            }
+            content: ContentUtil.createClientErrorContent("error in getStaticProps")
         }
     };
 };
 
 export const getStaticProps: GetStaticProps<BlogSlugProps> = async (context) => {
     const {params} = context;
+
     if (!params?.slug) {
         // todo: get path
         // todo: improve warnings
@@ -64,10 +59,9 @@ export const getStaticProps: GetStaticProps<BlogSlugProps> = async (context) => 
         return getErrorItem(context);
     }
 
-    const id: string = await FsCache.get(params.slug as string) as string;
     const {turnipClient, options} = await createServerSideClient();
-    const response = await turnipClient.getContentById({
-        primaryId: id,
+    const response = await turnipClient.getContentBySlug({
+        slug: params?.slug as string,
     }, options).response;
 
     if (!response.item) {
@@ -86,11 +80,11 @@ export const getStaticProps: GetStaticProps<BlogSlugProps> = async (context) => 
                 content: pbContent.content,
                 // media: pbContent.media ?? null,
                 tagList: pbContent.tagList,
-                accessDetails: pbContent.accessDetails,
                 meta: pbContent.meta,
                 primaryId: pbContent.primaryId,
                 // createdAt: pbContent.createdAt,
                 authorId: pbContent.authorId,
+                slug: pbContent.slug,
             }
         },
     };
