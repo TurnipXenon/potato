@@ -44,37 +44,34 @@ export const getStaticProps: GetStaticProps<AboutIndexProps> = async () => {
 export default function AboutIndex(props: AboutIndexProps) {
     const defaultStyle: SxProps<Theme> = {
         textAlign: "center",
-        margin: "2em auto",
+        margin: "2em 2em",
         padding: "2em",
-        width: "40em"
+        maxWidth: "40em"
     };
 
     return (
         <PageWrapper>
             <main style={{
                 display: "flex",
-                textAlign: "center",
-                justifyContent: "center",
+                alignItems: "center",
                 flexDirection: "column"
             }}>
                 <UnderConstructionCard sx={defaultStyle}/>
 
                 {
                     props.pageMeta.about &&
-                    <Card sx={defaultStyle}>
-                        <ReactMarkdown>
-                            {props.pageMeta.about}
-                        </ReactMarkdown>
-                    </Card>
-                }
-
-                {
-                    props.pageMeta.about &&
-                    <Card sx={defaultStyle}>
-                        <ReactMarkdown>
-                            {props.pageMeta.social}
-                        </ReactMarkdown>
-                    </Card>
+                    <>
+                        <Card sx={defaultStyle}>
+                            <ReactMarkdown>
+                                {props.pageMeta.about}
+                            </ReactMarkdown>
+                        </Card>
+                        <Card sx={defaultStyle}>
+                            <ReactMarkdown>
+                                {props.pageMeta.social}
+                            </ReactMarkdown>
+                        </Card>
+                    </>
                 }
             </main>
         </PageWrapper>

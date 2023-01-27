@@ -8,16 +8,20 @@ export interface SiteMapButtonProps {
     link: string;
     shouldHaveText?: boolean;
     imgSrc?: string;
+    buttonSize?: number; // em
 }
 
 export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
     const router = useRouter();
+    const buttonSize = props.buttonSize ?? 6;
+    const cardHeight = `${buttonSize}em`;
+    const imageSize = `${buttonSize + 1.5}em`;
 
     return (
         <Card className={styles.siteMapButtonComponent}
               sx={{
-                  borderRadius: "2em",
-                  height: "6em",
+                  borderRadius: `2em`,
+                  height: cardHeight,
                   backgroundColor: "rgba(255, 255, 255, 0)",
                   boxShadow: "none"
               }}>
@@ -36,7 +40,7 @@ export const SiteMapButtonComponent = (props: SiteMapButtonProps) => {
                     alt={"todo:"}
                     src={props.imgSrc ?? aresImage.src}
                     sx={{
-                        width: "7.5em",
+                        width: imageSize
                     }}
                 ></CardMedia>
                 {

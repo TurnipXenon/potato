@@ -7,6 +7,7 @@ import siteMapIcon from "../../public/icons/site-map-icon.jpg";
 
 export interface SiteMapButtonTrayProps {
     shouldHaveText?: boolean;
+    buttonSize?: number;
 }
 
 export const SiteMapButtonList = (props: SiteMapButtonTrayProps) => {
@@ -24,6 +25,7 @@ export const SiteMapButtonList = (props: SiteMapButtonTrayProps) => {
                 return <SiteMapButtonComponent
                     key={value.text}
                     shouldHaveText={props.shouldHaveText}
+                    buttonSize={props.buttonSize}
                     {...value}/>;
             })
         }

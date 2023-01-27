@@ -37,8 +37,9 @@ export const getStaticProps: GetStaticProps<SiteMapProps> = async (context) => {
 export default function SiteMapIndex(props: SiteMapProps) {
     return (
         <PageWrapper>
-            <main style={{padding: "2em"}}>
+            <main>
                 <UnderConstructionCard/>
+                <br/>
                 <h1>Site map</h1>
                 <h2>Main pages</h2>
                 <p><a href={"/"}>Home</a></p>

@@ -10,7 +10,7 @@ export const RandomizedImage = (props: RandomizedImageProps) => {
     const paddingRight = 1 + Math.random()*5;
     const paddingTop = 1 + Math.random()*7;
     // const paddingBottom = 1 + Math.random()*5;
-    const rotateRandom = Math.random()*60  - 30;
+    const rotateRandom = Math.random()*90  - 45;
 
     return <div style={{
         paddingTop: `${paddingTop}em`,
