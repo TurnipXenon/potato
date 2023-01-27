@@ -49,9 +49,9 @@ export const getStaticProps: GetStaticProps<BlogsIndexProps> = async (context) =
 export default function BlogsIndex(props: BlogsIndexProps) {
     const defaultStyle: SxProps<Theme> = {
         textAlign: "center",
-        margin: "2em auto",
-        padding: "2em",
-        width: "40em"
+        margin: "2em 2em",
+        width: "100%",
+        maxWidth: "40em"
     };
     const router = useRouter();
 
@@ -59,18 +59,20 @@ export default function BlogsIndex(props: BlogsIndexProps) {
         <PageWrapper>
             <main style={{
                 display: "flex",
-                textAlign: "center",
-                justifyContent: "center",
-                flexDirection: "column"
+                alignItems: "center",
+                flexDirection: "column",
+                padding: "2em"
             }}>
                 <UnderConstructionCard sx={defaultStyle}/>
                 {
                     props.contentList.map((value) => {
-                        return <Card key={value.slug} sx={defaultStyle}>
+                        return <Card
+                            key={value.slug}
+                            sx={defaultStyle}>
                             <CardActionArea onClick={() => {
                                 void router.push(`/blogs/${value.slug}`);
-                            }
-                            }>
+                            }}
+                                style={{padding: "1em"}}>
                                 <h1>{value.title}</h1>
                                 <p>{value.description}</p>
                                 <p>{value.blurb}</p>

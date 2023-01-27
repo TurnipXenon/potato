@@ -79,7 +79,9 @@ export const BriefGameCard = (props: BriefGameCardProps) => {
                     </div>
                 </div>
 
-                <div style={{
+                <div
+                    className={styles.briefCardGameLinks}
+                    style={{
                     display: "flex",
                     padding: "1em"
                 }}>

@@ -35,6 +35,18 @@
     flex-basis: 40%;
 }
 
+.briefCardGameLinks {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1em;
+}
+
+.briefCardGameLinks div {
+    flex: 1;
+    flex-basis: 33%;
+}
+
 .sidebarButtonContainer Button {
     background-color: var(--reinhard-secondary-medium);
     color: var(--text-color);

@@ -18,11 +18,6 @@ export interface HomeIndexProps {
     pageMeta: PageMetaProps;
 }
 
-export default function HomeIndex(props: HomeIndexProps) {
-    return <ReinhardHome {...props}/>;
-};
-
-
 export const getStaticProps: GetStaticProps<HomeIndexProps> = async () => {
     // todo get contents from database
     const {turnipClient, options, hostCode} = await createServerSideClient();
@@ -57,4 +52,8 @@ export const getStaticProps: GetStaticProps<HomeIndexProps> = async () => {
             pageMeta: pageMeta,
         },
     };
+};
+
+export default function HomeIndex(props: HomeIndexProps) {
+    return <ReinhardHome {...props}/>;
 };
